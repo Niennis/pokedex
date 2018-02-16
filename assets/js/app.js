@@ -25,8 +25,8 @@ function pokeSubmit() {
               types.push(pokemon.types[i].type.name.capitalize());
             }
               
-            pokeData = `<div class="row pokeContainer">
-            <div class="col-lg-6 col-md-6 offset-lg-5 offset-md-5 col-sm-12 col-xs-12">  
+            pokeData = `<div class="row">
+            <div class="col-lg-6 col-md-6 offset-lg-5 offset-md-5 col-sm-12 col-xs-12 pokeContainer">  
               <table class="table">
                 <tbody>
                   <tr>
@@ -82,7 +82,7 @@ function pokeSubmit() {
             }
           }
           plus = `<div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-6 col-md-6 offset-lg-5 offset-md-5 col-sm-12 col-xs-12 pokeContainer">
                       <table class="table">
                         <tbody>
                           <tr>  
