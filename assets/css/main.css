@@ -1,0 +1,44 @@
+body{
+  background-color: #e60808;
+}
+*{
+  padding: 0;
+  margin: 0;
+}
+
+.containDex{
+  background-image: url(../img/pokedex.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+h1{
+  margin: 2vh 1vh 0 0;
+  font-size: 10vw;
+  text-align: right;
+  color: white;
+}
+
+.search{
+  margin: 3vh 1vh 0 0;
+  text-align: right;
+}
+
+label{
+  color: white;
+  text-align: left;
+}
+
+input{
+  width: 90%;
+}
+
+#showInfo, #moreInfo{
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+}
+
+td{
+  text-align: right;
+}

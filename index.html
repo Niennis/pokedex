@@ -11,29 +11,38 @@
   <body>
     
 <!-- app search page-->
-  <div data-role="page" id="pokeSearch-page">
-    <div data-role="header" data-theme="b">
-         <h1>Pokeapi Demos</h1>
-    </div>
-    <div data-role="main" class="ui-content">
-      <form id="pokeForm" action="#pokeDetails-page" method="post">
-        <div>
-          <label for="pokeInput">Pokemon name or number:
-          <input type="text" name="pokeInput" id="pokeInput" placeholder="Name" value="">
+    <div class="container-fluid containDex">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 offset-lg-6 offset-md-6 offset-sm-6">
+            <h1>Pokédex</h1>
         </div>
-        
-        <div>
-          <a class="ui-btn btn btn-danger" onclick="pokeSubmit();">Search</a>
-        </div>
-      </form>
-    </div>
-    <div id="showInfo">
-      
-    </div>
-    <div id="moreInfo">
+      </div>
 
+      <div class="row search">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 offset-lg-6 offset-md-6 offset-sm-6">
+          <form id="pokeForm" action="#pokeDetails-page" method="post">
+            <div class="form-group">
+              <label for="pokeInput"><h2>Who's that...</h2></label>
+              <div class="row ">
+                <div class="col-6 offset-3">                    
+                  <input type="text" class="form-control" id="pokeInput" placeholder="... pokemon?">
+                </div>                  
+                <div class="col-2">
+                  <button type="button" class="btn btn-primary" onclick="pokeSubmit();">Search</button>         
+                </div>
+              </div>              
+            </div>
+          </form>            
+        </div>
+      </div>
+
+      <div id="showInfo">
+
+      </div>
+      <div id="moreInfo">
+
+      </div>
     </div>
-  </div>
   
     <script
     src="http://code.jquery.com/jquery-3.3.1.min.js"

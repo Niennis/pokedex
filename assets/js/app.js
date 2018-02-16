@@ -2,6 +2,7 @@ let showInfo = $('#showInfo');
 
 function pokeSubmit() {
   $('#showInfo').empty();
+  $('#moreInfo').empty();
   
   fetch('https://pokeapi.co/api/v2/pokemon/?limit=949')
     .then(function(response) {
@@ -21,15 +22,17 @@ function pokeSubmit() {
             let pokeData = '';
             let types = [];
             for(let i = 0; i < pokemon.types.length; i++){
-              types.push(pokemon.types[i].type.name);
+              types.push(pokemon.types[i].type.name.capitalize());
             }
               
-            pokeData = `<div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">            
-              <h2 id="pokeName">${pokemon.name}</h2>
-              <img src="${pokemon.sprites.front_default}" alt="">
+            pokeData = `<div class="row pokeContainer">
+            <div class="col-lg-6 col-md-6 offset-lg-5 offset-md-5 col-sm-12 col-xs-12">  
               <table class="table">
                 <tbody>
+                  <tr>
+                    <th scope="row"><h2 id="pokeName">${pokemon.name.capitalize()}</h2></th>
+                    <td><img src="${pokemon.sprites.front_default}" alt=""></td>
+                  </tr>
                   <tr>
                     <th scope="row">ID</th>
                     <td>${pokemon.id}</td>
@@ -54,14 +57,11 @@ function pokeSubmit() {
                 </table>
               </div>
             </div>`
-
               showInfo.append(pokeData);
-
         })
       }
     }      
   });
-
   fetch('https://pokeapi.co/api/v2/pokemon-species/?limit=802').then(function(moreResponse) {
     return moreResponse.json();
   })
@@ -75,29 +75,27 @@ function pokeSubmit() {
         })
         .then(function(pokemonPlus) {
           let plus = '';
-          let flavor;
-          console.log(pokemonPlus.flavor_text_entries);
-          for(let i = 0; i < pokemonPlus.flavor_text_entries.length; i++){
+          let flavor = '';
+          for(let i = 0; i < 5; i++){
             if ( pokemonPlus.flavor_text_entries[i].language.name === 'en') {
-              flavor = pokemonPlus.flavor_text_entries[i].flavor_text;
+              flavor = pokemonPlus.flavor_text_entries[i];          
             }
           }
-
           plus = `<div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <table class="table">
                         <tbody>
                           <tr>  
                             <th scope="row">Habitat</th>
-                            <td>${pokemonPlus.habitat.name}</td>
+                            <td>${pokemonPlus.habitat.name.capitalize()}</td>
                           </tr>
                           <tr>  
                             <th scope="row">Generation</th>
-                            <td>${pokemonPlus.generation.name}</td>
+                            <td>${pokemonPlus.generation.name.capitalize()}</td>
                           </tr>
                           <tr>  
-                            <th scope="row">Description</th>
-                            <td>${pokemonPlus.flavor}</td>
+                            <th scope="row">About</th>
+                            <td>${flavor.flavor_text}</td>
                           </tr>                
                         </tbody>
                       </table>
@@ -109,13 +107,6 @@ function pokeSubmit() {
   });
 }
 
-// function pokeSubmit(){
-//   var param = document.getElementById("pokeInput").value;
-//   var pokeURL = "http://pokeapi.co/api/v1/pokemon/" + param;
-
-//   $.getJSON(pokeURL, function(data){
-//       console.log(data);
-//       console.log(JSON.stringify(data, null, "  "));
-
-//   });
-// }
+String.prototype.capitalize = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+}
