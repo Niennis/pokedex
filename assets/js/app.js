@@ -10,10 +10,12 @@ function pokeSubmit() {
       return response.json();
     })
     .then(function(data) {
-      let pokeInput = $("#pokeInput").val();
+      let pokeInput = ($("#pokeInput").val()).toLowerCase();
+      let pokeCount = 0;
       console.log(pokeInput);
       for (var i = 0; i < data.results.length; i++){
-        if (pokeInput === data.results[i].name){    
+        if (pokeInput === data.results[i].name){
+          pokeCount++;
           let pokeInfo = data.results[i].url ;
           fetch(pokeInfo).then(function(result) {
             return result.json();
@@ -23,8 +25,7 @@ function pokeSubmit() {
             let types = [];
             for(let i = 0; i < pokemon.types.length; i++){
               types.push(pokemon.types[i].type.name.capitalize());
-            }
-              
+            }              
             pokeData = `<div class="row">
             <div class="col-lg-6 col-md-6 offset-lg-5 offset-md-5 col-sm-12 col-xs-12 pokeContainer">  
               <table class="table">
@@ -57,23 +58,31 @@ function pokeSubmit() {
                 </table>
               </div>
             </div>`
-              showInfo.append(pokeData);
-        })
-      }
-    }      
+              showInfo.append(pokeData);              
+        })        
+      } 
+    }    
+    if (pokeCount === 0) {
+      showInfo.append(`<div class="row">
+        <div class="col-lg-6 col-md-6 offset-lg-5 offset-md-5 col-sm-12 col-xs-12 pokeContainer">
+          <p>Pokemon not found. Try again!</p>
+        </div>
+      </div>`
+      )
+    }  
   });
   fetch('https://pokeapi.co/api/v2/pokemon-species/?limit=802').then(function(moreResponse) {
     return moreResponse.json();
   })
   .then(function(moreData) {
-    let pokeInput = $("#pokeInput").val();
+    let pokeInput = ($("#pokeInput").val()).toLowerCase();
     for (var i = 0; i < moreData.results.length; i++){
       if (pokeInput === moreData.results[i].name){    
         let pokeMoreInfo = moreData.results[i].url ;
         fetch(pokeMoreInfo).then(function(result) {
           return result.json();
         })
-        .then(function(pokemonPlus) {
+        .then(function(pokemonPlus) {       
           let plus = '';
           let flavor = '';
           for(let i = 0; i < 5; i++){
@@ -101,12 +110,17 @@ function pokeSubmit() {
                       </table>
                       </div></div>`
           $('#moreInfo').append(plus);
-        })    
+        })
+        .catch(function(error) {
+          console.log('Something went wrong: ' + error);
+        }) 
       };  
     }
   });
 }
 
+
+// Functión para poner en mayúscula la primera letra
 String.prototype.capitalize = function() {
   return this.charAt(0).toUpperCase() + this.slice(1);
 }

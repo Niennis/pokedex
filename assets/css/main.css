@@ -1,5 +1,6 @@
 body{
-  background-color: #e60808;
+  background-image: url('./../img/pokedex.jpg');
+  background-size: cover; 
 }
 *{
   padding: 0;
@@ -7,9 +8,6 @@ body{
 }
 
 .containDex{
-  background-image: url(../img/pokedex.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
   height: 100%;
 }
 
